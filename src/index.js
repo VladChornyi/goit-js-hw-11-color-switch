@@ -13,14 +13,19 @@ const stopBtnNode = document.querySelector('button[data-action="stop"]');
 
 const itervalLength = 1000;
 
+let isOnChange = false;
+
 let changeBcgByInterval;
 
 startBtnNode.addEventListener('click', e => {
-  changeBcgByInterval = setInterval(() => {
-    bodyNode.style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length)];
-  }, itervalLength);
+  if (!isOnChange)
+    changeBcgByInterval = setInterval(() => {
+      bodyNode.style.backgroundColor = colors[randomIntegerFromInterval(0, colors.length)];
+    }, itervalLength);
+  isOnChange = true;
 });
 
 stopBtnNode.addEventListener('click', e => {
   clearInterval(changeBcgByInterval);
+  isOnChange = false;
 });
